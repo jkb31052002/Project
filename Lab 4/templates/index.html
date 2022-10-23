@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+</head>
+<body>
+    <h1>Students List</h1>
+    {% if length!=0 %}
+    <table id="all-students">
+        <tr>
+            <th>SNo</th>
+            <th>Roll Number</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Actions</th>
+        </tr>
+        {% for student in students %}
+        <tr>
+                    <th>{{ student['student_id'] }}</th>
+                    <th><a href="/student/{{ student['student_id'] }}">{{ student['roll_number'] }}</a></th>
+                    <th>{{ student['first_name'] }}</th>
+                    <th>{{ student['last_name'] }}</th>
+            
+        <td>
+            <a href="/student/{{ student['student_id'] }}/update" type="button">Update</a>
+            <a href="/student/{{ student['student_id'] }}/delete" type="button">Delete</a>
+        </td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+    <p>No student found.Add the students now!</p>
+
+    {% endif %}
+    <a href="{{ url_for('add') }}">+Add Student</a>
+</body>
+</html>
