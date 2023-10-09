@@ -1,0 +1,102 @@
+{% extends "home.html" %}
+
+{% block content %}
+<head>
+    <title>Product Catalogue</title>
+    <style>
+        .profile {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            height: 500px;
+        }
+
+        .user-info {
+            font-size: xx-large;
+            margin-bottom: 20px;
+        }
+
+        .name {
+            font-size: x-large;
+        }
+
+        .username {
+            font-size: x-large;
+        }
+
+        .intro-text {
+            font-size: x-large;
+        }
+
+        .order-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin-top: 20px;
+        }
+
+        .order-card {
+            border: 1px solid #ddd;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 15px;
+        }
+
+        .order-card img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .order-details {
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .order-details p {
+            margin: 5px 0;
+        }
+
+    </style>
+</head>
+
+<div class="profile">
+    <h1 class="user-info">User Information</h1>
+    <h1 class="name">Name: <b>{{ user_name }}</b></h1>
+    <h1 class="username">Username: <b>{{ user_username }}</b></h1>
+    {% if count == 0 %}
+    <h1 class="intro-text">
+        Your shopping journey starts here - explore a world of possibilities and fill up your order.
+    </h1>
+    {% else %}
+    <h1 class="user-info">Your Orders</h1>
+    <div class="order-cards">
+        {% for order in orders_item|reverse %}
+        {% if order.customer_id == user_id and order.order_status == 'Purchased' %}
+        {% for product in products_item %}
+        {% if product.product_id == order.item_id %}
+        <div class="order-card">
+            <img src="{{ url_for('static', filename=product.image_url) }}" alt="{{ product.name }}">
+            <div class="order-details">
+                <h3><b>{{ order.item_title }}</b></h3>
+                <p>Price: ${{ order.item_cost }}</p>
+                <p>Quantity: {{ order.ordered_quantity }}</p>
+                <p>Subtotal: ${{ order.order_total }}</p>
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+        {% endif %}
+        {% endfor %}
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

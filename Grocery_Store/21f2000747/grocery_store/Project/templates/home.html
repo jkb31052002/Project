@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Grocerify</title>
+    <link rel="stylesheet" href="\static\modern_styles.css" />
+    <style>
+        @font-face {
+            font-family: 'Abril Fat Face';
+            src: url('./public/AbrilFatface-Regular.ttf') format('truetype');
+        }
+
+        body {
+            background-color: #FFEFDA;
+        }
+
+        header{
+            display: flex;
+            justify-content: space-between;
+            margin: 20px;    
+            font-family: 'Abril Fat Face';
+            font-size: 24px;
+            background-color: #FFE3BF;
+            height: 60px;
+            align-items: center;
+            border-radius: 20px;
+            box-shadow: 0px 4px 8px rgba(0, 0, .3, .3);
+        }
+
+        .logo{
+            padding: 10px;
+        }
+
+        nav{
+            display: flex;
+            justify-content: space-between;
+            gap: 50px;
+            padding: 5px;
+        }
+
+        .user-authentic{
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+        }
+
+        a {
+            text-decoration: none;
+            color: black;
+        }
+
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <a href="{{ url_for('routes.index') }}" class="navbar-item">
+                Grocerify
+            </a>
+        </div>
+        <nav>
+            <div class="home-nav"><a href="{{ url_for('routes.index') }}" class="navbar-item">
+                    Home
+                </a>
+            </div>
+            <div class="shop-nav">
+                {% if current_user.is_authenticated %}
+                <a href="/shop" class="navbar-item">
+                    Shop
+                </a>
+                {% endif %}
+            </div>
+            <div class="login-nav">
+                {% if not current_user.is_authenticated %}
+                <a href="/login" class="navbar-item">
+                    Login
+                </a>
+                {% endif %}
+            </div>
+            <div class="signup-nav">
+                <a href="/signup" class="navbar-item">
+                    Sign Up
+                </a>
+            </div>
+        </nav>
+        <div class="user-authentic">
+            {% if current_user.is_authenticated %}
+            <a href="{{url_for('routes.cart')}}" class="navbar-item">Cart</a>
+            <a href="{{url_for('routes.search')}}" class="navbar-item">Search</a>
+            <a href="{{ url_for('routes.profile') }}" class="navbar-item">
+                Profile
+            </a>
+            <a class="navbar-item" href="/logout">Logout</a>
+            {% endif %}
+        </div>
+    </header>
+
+    <div class="hero-body">
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+
+</html>

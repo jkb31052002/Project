@@ -1,0 +1,159 @@
+{% extends "common_adm.html" %}
+
+{% block content %}
+<div class="manage-cart">
+    <h1>Create Category</h1>
+    <form method="POST" action="{{ url_for('routes.manage_cat') }}">
+        <input class="create-input" type="text" name="create_cat" placeholder="Enter category name"  style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);" required>
+        <button onclick="showAlert()" type="submit">Create</button>
+    </form>
+
+    <h1>Existing Categories</h1>
+    <div class="categories-list">
+        {% if categories_item %}
+            <ul>
+                {% for cat in categories_item %}
+                <li>
+                    <span class="category-name">{{ cat.category_title }}</span>
+                    <form method="POST" action="{{ url_for('routes.manage_cat') }}">
+                        <input type="hidden" name="cat_id" value="{{ cat.category_id }}">
+                        <button onclick="showRemove()" class="remove-button" type="submit" name="remove_cat">Remove</button>
+                    </form>
+                </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="no-categories">No such categories!!</p>
+        {% endif %}
+    </div>
+</div>
+
+<style>
+/* Reset default styles */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    min-height: 100%;
+    font-family: sans-serif;
+}
+
+/* Background and container styles */
+body {
+    background-color: #F0F5F9;
+}
+
+.container {
+    max-width: 1024px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Manage cart section */
+.manage-cart {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+}
+
+/* Heading styles */
+h1 {
+    font-family: "Arial", sans-serif;
+    font-size: 1.8em;
+    margin-bottom: 15px;
+}
+
+/* Input and button styles */
+.create-input {
+    border: none;
+    outline: none;
+    font-size: 1em;
+    padding: 8px 12px;
+    border-radius: 20px;
+    background-color: #f2f2f2;
+    transition: background-color 0.3s;
+    margin-bottom: 10px;
+}
+
+.create-input::placeholder {
+    color: #999;
+}
+
+.create-input:focus {
+    background-color: #e0e0e0;
+}
+
+button {
+    background-color: #2eaaf2;
+    border-radius: 50px;
+    padding: 8px 20px;
+    font-family: "Arial", sans-serif;
+    font-size: 14px;
+    color: #fff;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #1d8cd8;
+}
+
+/* Categories list styles */
+.categories-list {
+    width: 100%;
+    margin-top: 20px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.category-name {
+    font-family: "Arial", sans-serif;
+    font-size: 1.1em;
+}
+
+.remove-button {
+    background-color: #dc3545;
+    padding: 6px 15px;
+    font-size: 13px;
+    margin: 0;
+    cursor: pointer;
+}
+
+.remove-button:hover {
+    background-color: #b02a37;
+}
+
+.no-categories {
+    font-family: "Arial", sans-serif;
+    font-size: 1em;
+    color: #888;
+    margin-top: 10px;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+}
+</style>
+
+{% endblock %}

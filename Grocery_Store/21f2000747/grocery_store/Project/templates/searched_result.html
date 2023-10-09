@@ -1,0 +1,99 @@
+{% extends "home.html" %}
+
+{% block content %}
+
+<head>
+    <title>Product Catalogue</title>
+    <style>
+        .search-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .product-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin-top: 20px;
+        }
+
+        .product-card {
+            border: 1px solid #ddd;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 15px;
+        }
+
+        .product-card img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .product-details {
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .product-details p {
+            margin: 5px 0;
+        }
+
+        button {
+            padding: 6px 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 50px;
+        }
+    </style>
+</head>
+
+<div class="search-container">
+    <h1><b>Search Results</b></h1>
+    <div class="product-cards">
+        {% if products_item %}
+        {% for prod in products_item %}
+        <div class="product-card">
+            <img src="{{ url_for('static', filename=prod.image_url) }}" alt="{{ prod.name }}">
+            <div class="product-details">
+                <h3><b>{{ prod.product_name }}</b></h3>
+                <p>Category: {{ prod.category.category_title }}</p>
+                <p>Price: ${{ prod.product_price }}/{{ prod.product_unit }}</p>
+                <p>Manufacture Date: {{ prod.manufacturing_date }}</p>
+                <p>Available: {{ prod.product_quantity }}</p>
+                <form method="POST">
+                    {% if prod.product_unit == 'piece' %}
+                    {% if prod.product_quantity > 0.0 %}
+                    <input label="quantity" type="number" id="quant" name="quant" min="1" max="{{ prod.product_quantity }}">
+                    {% else %}
+                    <b>OUT OF STOCK</b>
+                    {% endif %}
+                    {% else %}
+                    {% if prod.product_quantity > 0.0 %}
+                    <input step="1" type="number" id="quant" name="quant" min="0" max="{{ prod.product_quantity }}">
+                    {% else %}
+                    OUT OF STOCK
+                    {% endif %}
+                    {% endif %}
+                    <input type="hidden" name="prod_name" value="{{ prod.product_name }}">
+                    <input type="hidden" name="cost" value="{{ prod.product_price }}">
+                    <input type="hidden" name="id" value="{{ prod.product_id }}">
+                    <button type="submit">Add to Cart</button>
+                </form>
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <p>No results found.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

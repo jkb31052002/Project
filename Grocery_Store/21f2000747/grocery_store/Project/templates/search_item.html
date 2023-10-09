@@ -1,0 +1,45 @@
+{% extends "home.html" %}
+
+{% block content %}
+<style>
+    .search-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .search-form {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px;
+        border-radius: 50px;
+        background-color: #f2f2f2;
+    }
+
+    .search-input {
+        border: none;
+        outline: none;
+        padding: 8px;
+        border-radius: 50px 0 0 50px;
+    }
+
+    .search-button {
+        border: none;
+        outline: none;
+        padding: 8px 16px;
+        border-radius: 0 50px 50px 0;
+        background-color: #4CAF50;
+        color: white;
+        cursor: pointer;
+    }
+</style>
+<div class="search-container">
+    <h1><b>Product Search</b></h1>
+    <form class="search-form" method="POST" action="{{ url_for('routes.search') }}">
+        <input class="search-input" type="text" name="query_search" placeholder="Search Here">
+        <button class="search-button" type="submit">Search</button>
+    </form>
+</div>
+{% endblock %}

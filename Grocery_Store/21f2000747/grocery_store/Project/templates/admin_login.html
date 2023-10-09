@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manager Login</title>
+    <link href="/static/_423345b1-a9f0-406e-87d0-67c20d2566d6.jpeg" rel="stylesheet">
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        
+        html, body {
+            height: 100%;
+        }
+        
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: url(https://images.unsplash.com/photo-1466781783364-36c955e42a7f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2671&q=80);
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+        }
+        
+        .glass {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0));
+            backdrop-filter: blur(20px); 
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+        
+        .box {
+            border-radius: 10px;
+            width: 250px;
+            height: 350px;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .user-img {
+            height: 100px;
+            filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.2));
+            color: #ABC4AA;
+        }
+        
+        .user-name {
+            background: #e6e6e6;
+            height: 40px;
+            display: flex;
+            width: 60%;
+            align-items: center;
+            border-radius: 10px;
+            padding: 0 15px;
+            margin: 5px 0;
+        }
+        
+        .user-name input{
+            background: none;
+            border: none;
+            outline: none;
+            width: 100%;
+            height: 100%;
+            margin-left: 10px;
+        }
+        
+        .password {
+            background: #e6e6e6;
+            height: 40px;
+            display: flex;
+            width: 60%;
+            align-items: center;
+            border-radius: 10px;
+            padding: 0 15px;
+            margin: 5px 0;
+        }
+        
+        .password input{
+            background: none;
+            border: none;
+            outline: none;
+            width: 100%;
+            height: 100%;
+            margin-left: 10px;
+        }
+        
+        .user-name,password i {
+            color: #686868;
+        }
+        
+        ::placeholder {
+            color: #9a9a9a;
+        }
+        
+        .login-btn {
+            width: 68%;
+            padding: 10px;
+            color: white;
+            background: green;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        
+        a {
+            font-size: 15px;
+            color: #9a9a9a;
+            cursor: pointer;
+            -webkit-user-select: none; 
+            user-select: none; 
+            text-decoration: none;
+        }
+        
+        a.forgot {
+            margin-top: 15px;
+        }
+        
+        .create {
+            display: flex;
+            align-items: center;
+            position: absolute;
+            bottom: 50px;
+            
+        }
+        
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .login {
+            background-color: #fff;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            border-radius: 5px;
+            width: 300px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+
+        
+        @media (min-width: 768px) {
+            .container {
+                grid-template-columns: 50% 50%;
+                grid-template-areas: "design login";
+            }
+        
+            .design {
+                display: block;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <form method="POST" action="/admin/login">
+        <div class="container">
+            <div class="login">
+                <h3 class="title">Admin Login</h3>
+                <div class="text-input">
+
+                    <input type="text" name="admin_username" placeholder="Username">
+                </div>
+                <div class="text-input">
+                    <input type="password" name="admin_pwd" placeholder="Password">
+                </div>
+                <button class="login-btn">LOGIN</button>
+                <div class="create">
+                    <a href="/admin/signup">New Here? Sign UP!</a>
+                </div>
+            </div>
+        </div>
+    </form>
+</body>
+
+</html>
